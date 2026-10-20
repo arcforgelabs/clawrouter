@@ -1,6 +1,7 @@
 # Arc Forge deployment of upstream's private alias facade (docs/private-codex.md).
 # Upstream code only: worker/private-entry.ts with its two secret-store bindings.
 # Deploy: npx wrangler deploy -c wrangler.private.arcforge.toml
+# Secrets Store: the account default store (created 20 Oct 2026).
 name = "clawrouter-private"
 main = "worker/private-entry.ts"
 compatibility_date = "2026-06-05"
@@ -25,10 +26,10 @@ custom_domain = true
 
 [[secrets_store_secrets]]
 binding = "PRIVATE_CODEX_POLICY"
-store_id = "SECRETS_STORE_ID"
+store_id = "1a1ac37a410f481ab4aa4f59b96c817b"
 secret_name = "clawrouter-private-policy"
 
 [[secrets_store_secrets]]
 binding = "PRIVATE_CODEX_UPSTREAM"
-store_id = "SECRETS_STORE_ID"
+store_id = "1a1ac37a410f481ab4aa4f59b96c817b"
 secret_name = "clawrouter-private-upstream"
