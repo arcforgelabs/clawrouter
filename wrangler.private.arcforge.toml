@@ -1,0 +1,34 @@
+# Arc Forge deployment of upstream's private alias facade (docs/private-codex.md).
+# Upstream code only: worker/private-entry.ts with its two secret-store bindings.
+# Deploy: npx wrangler deploy -c wrangler.private.arcforge.toml
+name = "clawrouter-private"
+main = "worker/private-entry.ts"
+compatibility_date = "2026-06-05"
+compatibility_flags = ["enable_request_signal"]
+workers_dev = false
+preview_urls = false
+
+# The docs require Worker request logs and tracing to be off for this deployment.
+[observability]
+enabled = false
+
+[observability.logs]
+enabled = false
+invocation_logs = false
+
+[observability.traces]
+enabled = false
+
+[[routes]]
+pattern = "clawrouter-private.arcforge.au"
+custom_domain = true
+
+[[secrets_store_secrets]]
+binding = "PRIVATE_CODEX_POLICY"
+store_id = "SECRETS_STORE_ID"
+secret_name = "clawrouter-private-policy"
+
+[[secrets_store_secrets]]
+binding = "PRIVATE_CODEX_UPSTREAM"
+store_id = "SECRETS_STORE_ID"
+secret_name = "clawrouter-private-upstream"
